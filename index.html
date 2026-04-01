@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dexfinity | Go Beyond</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Questrial&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #05024E;
+            --light-blue: #0065F7;
+            --white: #FFFFFF;
+            --light-bg: #F4F6FC;
+            --light-blue-10: rgba(0, 101, 247, 0.1);
+            --light-blue-20: rgba(0, 101, 247, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            color: var(--dark-blue);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(5, 2, 78, 0.08);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-logo span {
+            font-family: 'Questrial', Arial, sans-serif;
+            font-size: 20px;
+            color: var(--dark-blue);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-indicator {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--dark-blue);
+            opacity: 0.2;
+            transition: opacity 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-dot.active {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+
+        /* Slide base */
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 80px 60px;
+        }
+
+        /* Circle decorations */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .circle-outline {
+            border: 2px solid var(--light-blue);
+            opacity: 0.15;
+        }
+
+        .circle-filled {
+            background: var(--light-blue);
+            opacity: 0.05;
+        }
+
+        .circle-gradient {
+            background: radial-gradient(circle, var(--light-blue) 0%, transparent 70%);
+            opacity: 0.08;
+        }
+
+        /* ===== SLIDE 1: HERO ===== */
+        .slide-hero {
+            background: var(--dark-blue);
+            color: var(--white);
+        }
+
+        .slide-hero nav span,
+        .slide-hero .nav-links a {
+            color: var(--white);
+        }
+
+        .slide-hero .nav-dot {
+            background: var(--white);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 40px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 7vw, 96px);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero-title .accent {
+            color: var(--light-blue);
+        }
+
+        .hero-tagline {
+            font-family: 'Questrial', Arial, sans-serif;
+            font-size: clamp(18px, 2.5vw, 28px);
+            opacity: 0.7;
+            margin-bottom: 48px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 40px;
+            background: var(--light-blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 101, 247, 0.4);
+        }
+
+        .hero-circles .circle:nth-child(1) {
+            width: 600px; height: 600px; top: -200px; right: -200px;
+        }
+        .hero-circles .circle:nth-child(2) {
+            width: 400px; height: 400px; bottom: -100px; left: -100px;
+        }
+        .hero-circles .circle:nth-child(3) {
+            width: 200px; height: 200px; top: 30%; left: 10%;
+        }
+        .hero-circles .circle:nth-child(4) {
+            width: 300px; height: 300px; bottom: 20%; right: 15%;
+        }
+
+        /* ===== SLIDE 2: SERVICES ===== */
+        .slide-services {
+            background: var(--white);
+        }
+
+        .slide-inner {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--light-blue);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 60px;
+            max-width: 600px;
+            letter-spacing: -1px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .service-card {
+            padding: 40px;
+            border-radius: 20px;
+            background: var(--light-bg);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(5, 2, 78, 0.1);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--light-blue);
+            opacity: 0.06;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: var(--white);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            opacity: 0.7;
+        }
+
+        /* ===== SLIDE 3: STATS ===== */
+        .slide-stats {
+            background: var(--dark-blue);
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .stat-number {
+            font-size: clamp(48px, 6vw, 80px);
+            font-weight: 700;
+            color: var(--light-blue);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.6;
+            font-weight: 400;
+        }
+
+        /* ===== SLIDE 4: APPROACH ===== */
+        .slide-approach {
+            background: var(--light-bg);
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .approach-visual {
+            position: relative;
+            height: 500px;
+        }
+
+        .approach-circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+
+        .approach-circle:hover {
+            transform: scale(1.05);
+        }
+
+        .approach-circle.c1 {
+            width: 250px; height: 250px;
+            background: var(--dark-blue);
+            color: var(--white);
+            top: 0; left: 50px;
+        }
+
+        .approach-circle.c2 {
+            width: 200px; height: 200px;
+            background: var(--light-blue);
+            color: var(--white);
+            top: 150px; right: 20px;
+        }
+
+        .approach-circle.c3 {
+            width: 180px; height: 180px;
+            border: 3px solid var(--light-blue);
+            color: var(--dark-blue);
+            bottom: 0; left: 100px;
+        }
+
+        .approach-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .approach-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            opacity: 0.7;
+            margin-bottom: 32px;
+        }
+
+        .approach-list {
+            list-style: none;
+        }
+
+        .approach-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(5, 2, 78, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .approach-list li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--light-blue);
+            flex-shrink: 0;
+        }
+
+        /* ===== SLIDE 5: CTA ===== */
+        .slide-cta {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            z-index: 2;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(40px, 5vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .cta-content p {
+            font-size: 18px;
+            opacity: 0.6;
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 16px 40px;
+            background: var(--light-blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 101, 247, 0.4);
+        }
+
+        .btn-outline {
+            padding: 16px 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 60px;
+            background: var(--dark-blue);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            opacity: 0.5;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide { padding: 80px 24px; }
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .approach-grid { grid-template-columns: 1fr; gap: 40px; }
+            .approach-visual { height: 350px; }
+            .approach-circle.c1 { width: 180px; height: 180px; left: 0; }
+            .approach-circle.c2 { width: 150px; height: 150px; }
+            .approach-circle.c3 { width: 140px; height: 140px; left: 40px; }
+            footer { flex-direction: column; gap: 8px; text-align: center; }
+            .stats-grid { gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+    <a href="#hero" class="nav-logo">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="38" stroke="#0065F7" stroke-width="4"/>
+            <circle cx="50" cy="50" r="28" stroke="#0065F7" stroke-width="2" opacity="0.5"/>
+            <circle cx="42" cy="42" r="38" stroke="#0065F7" stroke-width="2" opacity="0.3"/>
+        </svg>
+        <span>Dexfinity</span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#stats">Results</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-indicator">
+        <div class="nav-dot active" data-slide="0"></div>
+        <div class="nav-dot" data-slide="1"></div>
+        <div class="nav-dot" data-slide="2"></div>
+        <div class="nav-dot" data-slide="3"></div>
+        <div class="nav-dot" data-slide="4"></div>
+    </div>
+</nav>
+
+<!-- SLIDE 1: HERO -->
+<section class="slide slide-hero" id="hero">
+    <div class="hero-circles">
+        <div class="circle circle-outline" style="width:600px;height:600px;top:-200px;right:-200px"></div>
+        <div class="circle circle-gradient" style="width:400px;height:400px;bottom:-100px;left:-100px"></div>
+        <div class="circle circle-outline" style="width:200px;height:200px;top:30%;left:10%"></div>
+        <div class="circle circle-filled" style="width:300px;height:300px;bottom:20%;right:15%"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-logo fade-up">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="75" stroke="#0065F7" stroke-width="6"/>
+                <circle cx="100" cy="100" r="55" stroke="#0065F7" stroke-width="3" opacity="0.5"/>
+                <circle cx="85" cy="85" r="75" stroke="white" stroke-width="3" opacity="0.2"/>
+            </svg>
+        </div>
+        <h1 class="hero-title fade-up delay-1">
+            Digital<br>Performance<br><span class="accent">Agency</span>
+        </h1>
+        <p class="hero-tagline fade-up delay-2">Go Beyond</p>
+        <a href="#services" class="hero-cta fade-up delay-3">
+            Explore Our Services
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+</section>
+
+<!-- SLIDE 2: SERVICES -->
+<section class="slide slide-services" id="services">
+    <div class="slide-inner">
+        <p class="section-label fade-up">What We Do</p>
+        <h2 class="section-title fade-up delay-1">Performance marketing that delivers.</h2>
+        <div class="services-grid">
+            <div class="service-card fade-up delay-1">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3>Performance Marketing</h3>
+                <p>Data-driven campaigns across Google, Meta, and programmatic channels that maximize your ROI.</p>
+            </div>
+            <div class="service-card fade-up delay-2">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+                </div>
+                <h3>Analytics & BI</h3>
+                <p>Advanced measurement, attribution modeling, and business intelligence dashboards.</p>
+            </div>
+            <div class="service-card fade-up delay-3">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <h3>SEO & Content</h3>
+                <p>Strategic content creation and technical SEO to build sustainable organic growth.</p>
+            </div>
+            <div class="service-card fade-up delay-4">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                </div>
+                <h3>Email & CRM</h3>
+                <p>Lifecycle marketing automation, segmentation, and personalized customer journeys.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE 3: STATS -->
+<section class="slide slide-stats" id="stats">
+    <div class="slide-inner">
+        <p class="section-label fade-up" style="color: rgba(255,255,255,0.5)">Proven Results</p>
+        <h2 class="section-title fade-up delay-1" style="color: white">Numbers that speak for themselves.</h2>
+        <div class="stats-grid">
+            <div class="fade-up delay-1">
+                <div class="stat-number" data-count="200">0+</div>
+                <div class="stat-label">Clients served</div>
+            </div>
+            <div class="fade-up delay-2">
+                <div class="stat-number" data-count="50">0M+</div>
+                <div class="stat-label">Ad spend managed</div>
+            </div>
+            <div class="fade-up delay-3">
+                <div class="stat-number" data-count="12">0+</div>
+                <div class="stat-label">Years of experience</div>
+            </div>
+            <div class="fade-up delay-4">
+                <div class="stat-number" data-count="35">0+</div>
+                <div class="stat-label">Team members</div>
+            </div>
+        </div>
+    </div>
+    <div class="circle circle-outline" style="width:500px;height:500px;bottom:-200px;right:-150px"></div>
+    <div class="circle circle-gradient" style="width:300px;height:300px;top:-100px;left:-50px"></div>
+</section>
+
+<!-- SLIDE 4: APPROACH -->
+<section class="slide slide-approach" id="approach">
+    <div class="slide-inner">
+        <div class="approach-grid">
+            <div class="approach-visual fade-up">
+                <div class="approach-circle c1">Strategy<br>& Data</div>
+                <div class="approach-circle c2">Creative<br>Execution</div>
+                <div class="approach-circle c3">Continuous<br>Optimization</div>
+            </div>
+            <div class="approach-text">
+                <p class="section-label fade-up">Our Approach</p>
+                <h3 class="fade-up delay-1">Data meets creativity.</h3>
+                <p class="fade-up delay-2">We combine analytical rigor with creative excellence to deliver campaigns that don't just perform — they transform.</p>
+                <ul class="approach-list fade-up delay-3">
+                    <li>Full-funnel performance strategy</li>
+                    <li>Real-time optimization & reporting</li>
+                    <li>Cross-channel attribution</li>
+                    <li>Creative testing at scale</li>
+                    <li>Transparent partnership model</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE 5: CTA -->
+<section class="slide slide-cta" id="contact">
+    <div class="circle circle-outline" style="width:800px;height:800px;top:-300px;left:-300px"></div>
+    <div class="circle circle-gradient" style="width:500px;height:500px;bottom:-200px;right:-200px"></div>
+    <div class="cta-content">
+        <h2 class="fade-up">Ready to<br><span style="color: var(--light-blue)">Go Beyond?</span></h2>
+        <p class="fade-up delay-1">Let's discuss how we can accelerate your digital growth with performance marketing that delivers measurable results.</p>
+        <div class="cta-buttons fade-up delay-2">
+            <a href="mailto:hello@dexfinity.com" class="btn-primary">Get in Touch</a>
+            <a href="#services" class="btn-outline">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <span>&copy; 2026 Dexfinity. All rights reserved.</span>
+    <span>Go Beyond</span>
+</footer>
+
+<script>
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Nav scroll effect
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Nav dots
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.nav-dot');
+
+    const slideObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const index = Array.from(slides).indexOf(entry.target);
+                dots.forEach((d, i) => d.classList.toggle('active', i === index));
+
+                // Update nav color based on slide
+                const isDark = entry.target.classList.contains('slide-hero') ||
+                               entry.target.classList.contains('slide-stats') ||
+                               entry.target.classList.contains('slide-cta');
+                nav.style.color = isDark ? 'white' : '';
+                document.querySelectorAll('.nav-logo span, .nav-links a').forEach(el => {
+                    el.style.color = isDark && window.scrollY < 100 ? 'white' : '';
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    slides.forEach(s => slideObserver.observe(s));
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            slides[dot.dataset.slide].scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // Counter animation
+    const counters = document.querySelectorAll('.stat-number');
+    const countObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.dataset.count);
+                const suffix = el.textContent.replace(/[0-9]/g, '');
+                let current = 0;
+                const step = Math.ceil(target / 60);
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    el.textContent = current + suffix;
+                }, 30);
+                countObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(c => countObserver.observe(c));
+</script>
+
+</body>
+</html>
