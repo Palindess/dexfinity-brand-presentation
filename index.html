@@ -535,7 +535,59 @@
             flex-shrink: 0;
         }
 
-        /* ===== SLIDE 5: CTA ===== */
+        /* ===== SLIDE 5: PREMIER PARTNER ===== */
+        .slide-premier {
+            background: var(--white);
+            text-align: center;
+        }
+
+        .premier-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .premier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 28px;
+            background: var(--light-blue-10);
+            border-radius: 40px;
+            margin-bottom: 40px;
+        }
+
+        .premier-badge span {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--light-blue);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .premier-number {
+            font-size: clamp(80px, 12vw, 160px);
+            font-weight: 700;
+            color: var(--light-blue);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .premier-number-label {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 32px;
+        }
+
+        .premier-text {
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== SLIDE 6: CTA ===== */
         .slide-cta {
             background: var(--dark-blue);
             color: var(--white);
@@ -672,6 +724,7 @@
         <div class="nav-dot" data-slide="3"></div>
         <div class="nav-dot" data-slide="4"></div>
         <div class="nav-dot" data-slide="5"></div>
+        <div class="nav-dot" data-slide="6"></div>
     </div>
 </nav>
 
@@ -694,7 +747,7 @@
         <h1 class="hero-title fade-up delay-1">
             Ecommerce<br><span class="accent">Accelerator</span>
         </h1>
-        <p class="hero-tagline fade-up delay-2">Google Premier Partner 8 rokov v rade</p>
+        <p class="hero-tagline fade-up delay-2">Go Beyond</p>
         <a href="#flagship" class="hero-cta fade-up delay-3">
             Objavte naše inovácie
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -822,7 +875,6 @@
                 <h3 class="fade-up delay-1">Nie sme agentúra. Sme váš business partner.</h3>
                 <p class="fade-up delay-2">Budujeme dlhodobé partnerstvá, nie jednorazové kampane. Naše technológie a AI riešenia sú vyvinuté interne — presne pre potreby ecommerce.</p>
                 <ul class="approach-list fade-up delay-3">
-                    <li>Google Premier Partner 8 rokov v rade — agentúry come and go, my zostávame</li>
                     <li>IRISIMO: 900% rast za spoluprácu</li>
                     <li>eyerim: +27% nárast tržieb</li>
                     <li>Powerlogy: +12% obrat, -35% náklady</li>
@@ -833,7 +885,23 @@
     </div>
 </section>
 
-<!-- SLIDE 6: CTA -->
+<!-- SLIDE 6: PREMIER PARTNER -->
+<section class="slide slide-premier" id="premier">
+    <div class="circle circle-outline" style="width:400px;height:400px;top:-150px;left:-150px"></div>
+    <div class="circle circle-gradient" style="width:300px;height:300px;bottom:-100px;right:-100px"></div>
+    <div class="premier-content">
+        <div class="premier-badge fade-up">
+            <span>Google Premier Partner</span>
+        </div>
+        <div class="premier-number fade-up delay-1">8</div>
+        <div class="premier-number-label fade-up delay-2">rokov v rade. Bez prerušenia.</div>
+        <p class="premier-text fade-up delay-3">
+            Agentúry come and go. My sme jedni z mála na Slovensku, ktorí si Premier Partner status udržiavajú nepretržite od začiatku. Nie je to náhoda — je to výsledok konzistentných výsledkov, rastu klientov a technologickej excelencie.
+        </p>
+    </div>
+</section>
+
+<!-- SLIDE 7: CTA -->
 <section class="slide slide-cta" id="contact">
     <div class="circle circle-outline" style="width:800px;height:800px;top:-300px;left:-300px"></div>
     <div class="circle circle-gradient" style="width:500px;height:500px;bottom:-200px;right:-200px"></div>
