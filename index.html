@@ -235,7 +235,97 @@
             width: 300px; height: 300px; bottom: 20%; right: 15%;
         }
 
-        /* ===== SLIDE 2: SERVICES ===== */
+        /* ===== SLIDE 2: FLAGSHIP ===== */
+        .slide-flagship {
+            background: var(--light-bg);
+        }
+
+        .flagship-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 48px;
+        }
+
+        .flagship-card {
+            padding: 48px;
+            border-radius: 24px;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .flagship-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(5, 2, 78, 0.12);
+        }
+
+        .flagship-card::after {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--light-blue);
+            opacity: 0.05;
+        }
+
+        .flagship-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--light-blue-10);
+            color: var(--light-blue);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .flagship-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .flagship-card p {
+            font-size: 15px;
+            line-height: 1.7;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .flagship-stats {
+            display: flex;
+            gap: 32px;
+        }
+
+        .flagship-stat {
+            text-align: center;
+        }
+
+        .flagship-stat strong {
+            display: block;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--light-blue);
+        }
+
+        .flagship-stat span {
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .flagship-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== SLIDE 3: SERVICES ===== */
         .slide-services {
             background: var(--white);
         }
@@ -569,9 +659,10 @@
         <span>Dexfinity</span>
     </a>
     <ul class="nav-links">
+        <li><a href="#flagship">Flagship</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#stats">Results</a></li>
-        <li><a href="#approach">Approach</a></li>
+        <li><a href="#why">Why Us</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-indicator">
@@ -580,6 +671,7 @@
         <div class="nav-dot" data-slide="2"></div>
         <div class="nav-dot" data-slide="3"></div>
         <div class="nav-dot" data-slide="4"></div>
+        <div class="nav-dot" data-slide="5"></div>
     </div>
 </nav>
 
@@ -600,75 +692,115 @@
             </svg>
         </div>
         <h1 class="hero-title fade-up delay-1">
-            Digital<br>Performance<br><span class="accent">Agency</span>
+            Ecommerce<br><span class="accent">Accelerator</span>
         </h1>
         <p class="hero-tagline fade-up delay-2">Go Beyond</p>
-        <a href="#services" class="hero-cta fade-up delay-3">
-            Explore Our Services
+        <a href="#flagship" class="hero-cta fade-up delay-3">
+            Objavte naše inovácie
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
     </div>
 </section>
 
-<!-- SLIDE 2: SERVICES -->
-<section class="slide slide-services" id="services">
+<!-- SLIDE 2: FLAGSHIP -->
+<section class="slide slide-flagship" id="flagship">
     <div class="slide-inner">
-        <p class="section-label fade-up">What We Do</p>
-        <h2 class="section-title fade-up delay-1">Performance marketing that delivers.</h2>
-        <div class="services-grid">
-            <div class="service-card fade-up delay-1">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <p class="section-label fade-up">Flagship Produkty</p>
+        <h2 class="section-title fade-up delay-1">Inovácie, ktoré menia pravidlá hry.</h2>
+        <div class="flagship-grid">
+            <div class="flagship-card fade-up delay-2">
+                <span class="flagship-badge">AI Event</span>
+                <h3>AI Creative Masterclass & Roadshow</h3>
+                <p>Exkluzívny event o AI kreatívach v digitálnom marketingu. Vol. 1 vypredaný, Vol. 2 v Google offices Praha a v Bratislave. Naučíme vás, ako AI kreatívy znižujú CPA a zvyšujú dosah kampaní.</p>
+                <div class="flagship-stats">
+                    <div class="flagship-stat">
+                        <strong>-50%</strong>
+                        <span>CPA s AI kreatívami</span>
+                    </div>
+                    <div class="flagship-stat">
+                        <strong>+52%</strong>
+                        <span>Väčší dosah</span>
+                    </div>
                 </div>
-                <h3>Performance Marketing</h3>
-                <p>Data-driven campaigns across Google, Meta, and programmatic channels that maximize your ROI.</p>
             </div>
-            <div class="service-card fade-up delay-2">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+            <div class="flagship-card fade-up delay-3">
+                <span class="flagship-badge">AI Technology</span>
+                <h3>MagicScript</h3>
+                <p>Náš proprietárny bid management systém s margin-based biddingom. Automatizuje 86 % ad spendu na základe reálnych marží, nie ROAS. Technológia, ktorú sme vyvinuli interne pre maximálnu efektivitu.</p>
+                <div class="flagship-stats">
+                    <div class="flagship-stat">
+                        <strong>86%</strong>
+                        <span>Ad spendu automatizovaný</span>
+                    </div>
+                    <div class="flagship-stat">
+                        <strong>Margin</strong>
+                        <span>Based bidding</span>
+                    </div>
                 </div>
-                <h3>Analytics & BI</h3>
-                <p>Advanced measurement, attribution modeling, and business intelligence dashboards.</p>
-            </div>
-            <div class="service-card fade-up delay-3">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                </div>
-                <h3>SEO & Content</h3>
-                <p>Strategic content creation and technical SEO to build sustainable organic growth.</p>
-            </div>
-            <div class="service-card fade-up delay-4">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
-                </div>
-                <h3>Email & CRM</h3>
-                <p>Lifecycle marketing automation, segmentation, and personalized customer journeys.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SLIDE 3: STATS -->
+<!-- SLIDE 3: SERVICES -->
+<section class="slide slide-services" id="services">
+    <div class="slide-inner">
+        <p class="section-label fade-up">Čo robíme</p>
+        <h2 class="section-title fade-up delay-1">Kompletný ecommerce ekosystém.</h2>
+        <div class="services-grid">
+            <div class="service-card fade-up delay-1">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>CreAI</h3>
+                <p>AI creative oddelenie pod vedením Mateja Astaryho. Produkcia kreatív pomocou AI, ktoré reálne zvyšujú výkon kampaní.</p>
+            </div>
+            <div class="service-card fade-up delay-2">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <h3>Online Export</h3>
+                <p>Expanzia e-shopov do 34+ trhov. Od lokalizácie po performance kampane — kompletný vstup na zahraničné trhy.</p>
+            </div>
+            <div class="service-card fade-up delay-3">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3>Performance Campaigns</h3>
+                <p>Google, Meta, programmatic. 8 rokov Google Premier Partner. Kampane riadené dátami a reálnymi maržami, nie odhadmi.</p>
+            </div>
+            <div class="service-card fade-up delay-4">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+                </div>
+                <h3>Analytics & Consulting</h3>
+                <p>Dátová analytika, BI dashboardy, atribučné modelovanie. Business partner model — nie dodávateľ, ale súčasť vášho tímu.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE 4: STATS -->
 <section class="slide slide-stats" id="stats">
     <div class="slide-inner">
-        <p class="section-label fade-up" style="color: rgba(255,255,255,0.5)">Proven Results</p>
-        <h2 class="section-title fade-up delay-1" style="color: white">Numbers that speak for themselves.</h2>
+        <p class="section-label fade-up" style="color: rgba(255,255,255,0.5)">Výsledky</p>
+        <h2 class="section-title fade-up delay-1" style="color: white">Čísla, ktoré hovoria za nás.</h2>
         <div class="stats-grid">
             <div class="fade-up delay-1">
-                <div class="stat-number" data-count="200">0+</div>
-                <div class="stat-label">Clients served</div>
+                <div class="stat-number" data-count="79">0+</div>
+                <div class="stat-label">Špecialistov v tíme</div>
             </div>
             <div class="fade-up delay-2">
-                <div class="stat-number" data-count="50">0M+</div>
-                <div class="stat-label">Ad spend managed</div>
+                <div class="stat-number" data-count="34">0+</div>
+                <div class="stat-label">Trhov, na ktorých pôsobíme</div>
             </div>
             <div class="fade-up delay-3">
-                <div class="stat-number" data-count="12">0+</div>
-                <div class="stat-label">Years of experience</div>
+                <div class="stat-number" data-count="180">0M€</div>
+                <div class="stat-label">Ročný obrat klientov</div>
             </div>
             <div class="fade-up delay-4">
-                <div class="stat-number" data-count="35">0+</div>
-                <div class="stat-label">Team members</div>
+                <div class="stat-number" data-count="400">0+</div>
+                <div class="stat-label">Realizovaných projektov</div>
             </div>
         </div>
     </div>
@@ -676,41 +808,41 @@
     <div class="circle circle-gradient" style="width:300px;height:300px;top:-100px;left:-50px"></div>
 </section>
 
-<!-- SLIDE 4: APPROACH -->
-<section class="slide slide-approach" id="approach">
+<!-- SLIDE 5: WHY US -->
+<section class="slide slide-approach" id="why">
     <div class="slide-inner">
         <div class="approach-grid">
             <div class="approach-visual fade-up">
-                <div class="approach-circle c1">Strategy<br>& Data</div>
-                <div class="approach-circle c2">Creative<br>Execution</div>
-                <div class="approach-circle c3">Continuous<br>Optimization</div>
+                <div class="approach-circle c1">AI<br>& Tech</div>
+                <div class="approach-circle c2">Margin<br>Bidding</div>
+                <div class="approach-circle c3">Business<br>Partner</div>
             </div>
             <div class="approach-text">
-                <p class="section-label fade-up">Our Approach</p>
-                <h3 class="fade-up delay-1">Data meets creativity.</h3>
-                <p class="fade-up delay-2">We combine analytical rigor with creative excellence to deliver campaigns that don't just perform — they transform.</p>
+                <p class="section-label fade-up">Prečo Dexfinity</p>
+                <h3 class="fade-up delay-1">Nie sme agentúra. Sme váš business partner.</h3>
+                <p class="fade-up delay-2">Budujeme dlhodobé partnerstvá, nie jednorazové kampane. Naše technológie a AI riešenia sú vyvinuté interne — presne pre potreby ecommerce.</p>
                 <ul class="approach-list fade-up delay-3">
-                    <li>Full-funnel performance strategy</li>
-                    <li>Real-time optimization & reporting</li>
-                    <li>Cross-channel attribution</li>
-                    <li>Creative testing at scale</li>
-                    <li>Transparent partnership model</li>
+                    <li>8 rokov Google Premier Partner</li>
+                    <li>IRISIMO: 900% rast za spoluprácu</li>
+                    <li>eyerim: +27% nárast tržieb</li>
+                    <li>Powerlogy: +12% obrat, -35% náklady</li>
+                    <li>€40M+ ročný ad credit pod správou</li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SLIDE 5: CTA -->
+<!-- SLIDE 6: CTA -->
 <section class="slide slide-cta" id="contact">
     <div class="circle circle-outline" style="width:800px;height:800px;top:-300px;left:-300px"></div>
     <div class="circle circle-gradient" style="width:500px;height:500px;bottom:-200px;right:-200px"></div>
     <div class="cta-content">
-        <h2 class="fade-up">Ready to<br><span style="color: var(--light-blue)">Go Beyond?</span></h2>
-        <p class="fade-up delay-1">Let's discuss how we can accelerate your digital growth with performance marketing that delivers measurable results.</p>
+        <h2 class="fade-up">Posuňte sa<br><span style="color: var(--light-blue)">Go Beyond</span></h2>
+        <p class="fade-up delay-1">Dohodnite si konzultáciu a zistite, ako vám AI technológie a naše skúsenosti z 34+ trhov pomôžu akcelerovať rast vášho e-shopu.</p>
         <div class="cta-buttons fade-up delay-2">
-            <a href="mailto:hello@dexfinity.com" class="btn-primary">Get in Touch</a>
-            <a href="#services" class="btn-outline">Learn More</a>
+            <a href="mailto:hello@dexfinity.com" class="btn-primary">Dohodnúť konzultáciu</a>
+            <a href="#flagship" class="btn-outline">Pozrieť inovácie</a>
         </div>
     </div>
 </section>
@@ -752,7 +884,9 @@
                 // Update nav color based on slide
                 const isDark = entry.target.classList.contains('slide-hero') ||
                                entry.target.classList.contains('slide-stats') ||
-                               entry.target.classList.contains('slide-cta');
+                               entry.target.classList.contains('slide-cta') ||
+                               entry.target.id === 'stats' ||
+                               entry.target.id === 'contact';
                 nav.style.color = isDark ? 'white' : '';
                 document.querySelectorAll('.nav-logo span, .nav-links a').forEach(el => {
                     el.style.color = isDark && window.scrollY < 100 ? 'white' : '';
